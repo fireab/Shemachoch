@@ -27,7 +27,6 @@ const Update = ({ inputs, title, add }) => {
 
     const uploadFile = () => {
       const name = new Date().getTime() + file.name;
-
       console.log(name);
       const storageRef = ref(storage, file.name);
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -63,7 +62,6 @@ const Update = ({ inputs, title, add }) => {
     file && uploadFile();
   }, [file,productId]);
 
-  console.log(data);
 
   const handleInput = (e) => {
     const id = e.target.id;

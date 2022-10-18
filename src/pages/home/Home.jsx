@@ -38,14 +38,13 @@ const Home = () => {
 
     
   },[])
-  console.log(data.length,"datas");
-  console.log(earning,"earning");
+
   let cost=0;
   data.forEach(doc=>{
     cost=cost+doc.total_price;
       });
       const percent=(earning/cost)*100;
-      console.log("P:",percent,"cost:",cost);
+      
   return (
     <div className="home">
       <Sidebar />

@@ -112,11 +112,6 @@ export const productColumns = [
       );
     },  
   },
-  // {
-  //   field: "metric",
-  //   headerName: "Metric",
-  //   width: 90,   
-  // },
   {
     field: "total_price",
     headerName: "Total Price",

@@ -68,12 +68,6 @@ export const userInputs = [
       type: "number",
       placeholder: "limit of amount per family",
     },
-    // {
-    //   id: "catagory",
-    //   label: "Category",
-    //   type: "text",
-    //   placeholder: "Food",
-    // },
     {
       id: "unit_amount",
       label: "Unit amount",
