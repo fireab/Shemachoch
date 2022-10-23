@@ -107,11 +107,12 @@ const Datatable = ({input}) => {
     } 
   }
 
-  const notification=(id,name,limit,metric)=>{
+  const notification=(id,name,limit,metric,brand)=>{
     notify(id)
     accUser.forEach(doc=>{
     const createCart=async()=>{
-        await addDoc(collection(db,"users",`${doc.id}`,"notifications"),{title:`hello ${doc.first_name} ${doc.last_name} ${name} is in store you can take  ${limit} ${metric}`,detail:"",timestamp:serverTimestamp(),status:"new"});
+        await addDoc(collection(db,"users",`${doc.id}`,"notifications"),{title:`hello ${doc.first_name} ${doc.last_name} ${name} is in store you can take  ${limit} ${metric}`,
+        detail:`hello ${doc.first_name} ${doc.last_name} ${name} is in store you can take  ${limit} ${metric} `,timestamp:serverTimestamp(),status:"new"});
       };
       createCart()
     })
@@ -258,7 +259,7 @@ const Datatable = ({input}) => {
               <div 
               className="deleteButton"
               style={{color:'black',display:`${params.row.notify && "none"}`}}
-              onClick={() => notification(params.row.productID,params.row.product,params.row.limit,params.row.metric)}>
+              onClick={() => notification(params.row.productID,params.row.product,params.row.limit,params.row.metric,params.row.brand)}>
               Notify
               </div>
             </>:

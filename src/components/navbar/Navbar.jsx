@@ -18,8 +18,8 @@ const Navbar = () => {
   const { dispatch } = useContext(DarkModeContext);
   const [users,setUsers]=useState([]);
   const usersCollectionRef=collection(db,"Admin");
-  const q=query(usersCollectionRef,where("email","==",current.currentUser.email))
   useEffect(()=>{
+    const q=query(usersCollectionRef,where("email","==",current.currentUser.email))
     const getUsers=async ()=>{
         const data=await getDocs(q);
        setUsers(data.docs.map((doc)=>({...doc.data(),id:doc.id })))  
@@ -28,7 +28,7 @@ const Navbar = () => {
     
     getUsers()               
     
-  }, [])
+  }, [usersCollectionRef,current.currentUser.email])
 
   return (
     <div className="navbar">

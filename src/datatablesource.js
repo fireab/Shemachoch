@@ -50,7 +50,7 @@ export const productColumns = [
   {
     field: "image",
     headerName: "Product",
-    width: 200,
+    width: 250,
     renderCell: (params) => {
       return (
         <div className="cellWithImg">
@@ -63,12 +63,17 @@ export const productColumns = [
   {
     field: "brand",
     headerName: "Brand",
-    width: 170,
+    width: 120,
+  },
+  {
+    field: "category",
+    headerName: "Category",
+    width: 120,
   },
   {
     field: "limit",
     headerName: "Limit per fam",
-    width: 140,
+    width: 110,
   },
   {
     field: "unit_amount",
@@ -106,7 +111,7 @@ export const productColumns = [
       return (
         <div className="cellWithImg">
           {params.row.total_amount} &nbsp;
-          {params.row.metric}
+          {/* {params.row.metric} */}
            
         </div>
       );
