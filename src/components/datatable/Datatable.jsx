@@ -107,12 +107,15 @@ const Datatable = ({input}) => {
     } 
   }
 
-  const notification=(id,name,limit,metric,brand)=>{
+  const notification=(id,name,limit,metric,brand,total_amount,unit_amount)=>{
     notify(id)
+    const current = new Date();
+    const date = `${current.getDate()}/${current.getMonth()+2}/${current.getFullYear()}`;
     accUser.forEach(doc=>{
     const createCart=async()=>{
-        await addDoc(collection(db,"users",`${doc.id}`,"notifications"),{title:`hello ${doc.first_name} ${doc.last_name} ${name} is in store you can take  ${limit} ${metric}`,
-        detail:`hello ${doc.first_name} ${doc.last_name} ${name} is in store you can take  ${limit} ${metric} `,timestamp:serverTimestamp(),status:"new"});
+        await addDoc(collection(db,"users",`${doc.id}`,"notifications"),{title:`hello dear ${doc.first_name} ${doc.last_name} A product has been added to the store you can now order`,
+        detail:`1 unit = ${unit_amount} ${metric}.          ${total_amount} unit of ${brand} ${name} has been added to the store.  you can now order with a limit of ${limit} unit until ${date}  Thank you `,
+        timestamp:serverTimestamp(),status:"new"});
       };
       createCart()
     })
@@ -128,13 +131,15 @@ const Datatable = ({input}) => {
     if (docSnap.exists()) {
       const orderDoc=doc(db,"users",userId)
       const newField={status:"accepted", CN:`${cuponNo}` }
-        await updateDoc(orderDoc,newField)      
+        await updateDoc(orderDoc,newField)        
+        // await addDoc(collection(db,"users",userId,"notifications"),{title:` Welcome Dilamo Wondimu, you are a new member of 1 cooperative community.` })
     } else {
       console.log("No such document!");
     } 
     
     handleClose()
   }
+
   const handleUserDecline=async(id)=>{
     try {
       await deleteDoc(doc(db,"users", id));
@@ -163,8 +168,7 @@ const Datatable = ({input}) => {
         console.log("No such document!");
       } 
       const newField={status:"accepted" }
-        await updateDoc(orderDoc,newField)    
-
+        await updateDoc(orderDoc,newField)  
       
     } else {
       console.log("No such document!");
@@ -257,9 +261,9 @@ const Datatable = ({input}) => {
               Delete
               </div>
               <div 
-              className="deleteButton"
-              style={{color:'black',display:`${params.row.notify && "none"}`}}
-              onClick={() => notification(params.row.productID,params.row.product,params.row.limit,params.row.metric,params.row.brand)}>
+              className="viewButton"
+              style={{display:`${params.row.notify && "none"}`}}
+              onClick={() => notification(params.row.productID,params.row.product,params.row.limit,params.row.metric,params.row.brand,params.row.total_amount,params.row.unit_amount)}>
               Notify
               </div>
             </>:
